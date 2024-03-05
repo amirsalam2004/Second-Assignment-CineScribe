@@ -58,8 +58,10 @@ public class Actors {
 
     public boolean isAlive(String actorsInfoJson){
         //TODO --> (If your chosen actor is alive it must return true otherwise it must return false)
-        boolean statues = false;
-        return statues;
+        JSONArray getinformation=new JSONArray(actorsInfoJson);
+        JSONObject getIsAlive=(JSONObject) getinformation.get(0);
+        this.isAlive=getIsAlive.getBoolean("is_alive");
+        return this.isAlive;
     }
 
     public String getDateOfDeathViaApi(String actorsInfoJson){
