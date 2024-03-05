@@ -73,4 +73,5 @@ public class Movie {
         runtime=getRuntime.getString("Runtime");
         return runtime;
     }
+
 }

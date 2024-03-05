@@ -1,3 +1,6 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,12 +8,13 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 public class Actors {
     public static final String API_KEY = "JFBvTTeuMdHyTL1+db88MA==aa4RM9amNQDus5Ad";   // TODO --> add your api key about Actors here
-    String netWorth;
+    String netWorth="";
     Boolean isAlive;
 
-    public Actors(String netWorth, boolean isAlive){
-        //TODO --> (Write a proper constructor using the get_from_api functions)
-    }
+
+//    public Actors(String netWorth, boolean isAlive){
+//        //TODO --> (Write a proper constructor using the get_from_api functions)
+//    }
     @SuppressWarnings({"deprecation"})
     /**
      * Retrieves data for the specified actor.
@@ -43,10 +47,13 @@ public class Actors {
             return null;
         }
     }
-    public double getNetWorthViaApi(String actorsInfoJson){
+    public String getNetWorthViaApi(String actorsInfoJson){
         //TODO --> (This function must return the "NetWorth")
-        double result = 0.0;
-        return result;
+        JSONArray getinformation=new JSONArray(actorsInfoJson);
+        JSONObject getNetWorth=(JSONObject) getinformation.get(0);
+        double netWorth=getNetWorth.getDouble("net_worth");
+        this.netWorth=String.valueOf(netWorth);
+        return this.netWorth;
     }
 
     public boolean isAlive(String actorsInfoJson){
