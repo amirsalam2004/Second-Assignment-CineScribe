@@ -11,6 +11,7 @@ public class Movie {
     int ImdbVotes;
     ArrayList<String> actorsList=new ArrayList<>();
     String rating;
+    String runtime;
 
 //    public Movie(ArrayList<String> actorsList, String rating, int ImdbVotes){
 //        //TODO --> (Write a proper constructor using the get_from_api functions)
@@ -66,5 +67,10 @@ public class Movie {
         for(int i=0;i< list.length;i++){
             actorsList.add(list[i]);
         }
+    }
+    public String getRuntimeViaApi(String movieInfoJson){
+        JSONObject getRuntime=new JSONObject(movieInfoJson);
+        runtime=getRuntime.getString("Runtime");
+        return runtime;
     }
 }
