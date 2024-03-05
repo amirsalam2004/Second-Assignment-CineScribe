@@ -51,8 +51,11 @@ public class Movie {
     public String getRatingViaApi(String moviesInfoJson){
         //TODO --> (This function must return the rating in the "Ratings" part
         // where the source is "Internet Movie Database")  -->
-        String rating = "";
-        return rating;
+        JSONObject rate=new JSONObject(moviesInfoJson);
+        JSONArray ratingArrays=rate.getJSONArray("Ratings");
+        JSONObject IMDBrating=(JSONObject) ratingArrays.get(0);
+        this.rating=IMDBrating.getString("Value");
+        return this.rating;
     }
 
     public void getActorListViaApi(String movieInfoJson){
