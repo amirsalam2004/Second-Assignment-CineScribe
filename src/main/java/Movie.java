@@ -1,3 +1,5 @@
+import org.json.*;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -5,14 +7,14 @@ import java.net.URLConnection;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 public class Movie {
-    public static final String API_KEY = "Your API_KEY";   // TODO --> add your api key about Movie here
+    public static final String API_KEY = "fa9e05cf";   // TODO --> add your api key about Movie here
     int ImdbVotes;
-    ArrayList<String> actorsList;
+    ArrayList<String> actorsList=new ArrayList<>();
     String rating;
 
-    public Movie(ArrayList<String> actorsList, String rating, int ImdbVotes){
-        //TODO --> (Write a proper constructor using the get_from_api functions)
-    }
+//    public Movie(ArrayList<String> actorsList, String rating, int ImdbVotes){
+//        //TODO --> (Write a proper constructor using the get_from_api functions)
+//    }
 
     @SuppressWarnings("deprecation")
     /**
@@ -39,8 +41,11 @@ public class Movie {
     public int getImdbVotesViaApi(String moviesInfoJson){
         //TODO --> (This function must change and return the "ImdbVotes" as an Integer)
         // NOTICE :: you are not permitted to convert this function to return a String instead of an int !!!
-        int ImdbVotes = 0;
-        return ImdbVotes;
+        JSONObject getImdbVotes=new JSONObject(moviesInfoJson);
+        String ImdbVotes=getImdbVotes.getString("imdbVotes");
+        ImdbVotes=ImdbVotes.replace(",","");
+        this.ImdbVotes= Integer.parseInt(ImdbVotes);
+        return (this.ImdbVotes);
     }
 
     public String getRatingViaApi(String moviesInfoJson){
@@ -52,5 +57,11 @@ public class Movie {
 
     public void getActorListViaApi(String movieInfoJson){
         //TODO --> (This function must return the "Actors" in actorsList)
+        JSONObject getActorList=new JSONObject(movieInfoJson);
+        String actors=getActorList.getString("Actors");
+        String[] list=actors.split(",");
+        for(int i=0;i< list.length;i++){
+            actorsList.add(list[i]);
+        }
     }
 }
