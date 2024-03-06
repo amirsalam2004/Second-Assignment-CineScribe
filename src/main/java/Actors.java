@@ -6,11 +6,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
+
 public class Actors {
     public static final String API_KEY = "JFBvTTeuMdHyTL1+db88MA==aa4RM9amNQDus5Ad";   // TODO --> add your api key about Actors here
     String netWorth;
     Boolean isAlive;
     String dateOfDeath;
+    ArrayList<String> occupationList=new ArrayList<>();
 
 //    public Actors(String netWorth, boolean isAlive){
 //        //TODO --> (Write a proper constructor using the get_from_api functions)
@@ -74,5 +77,13 @@ public class Actors {
         }
         return "There is no information to display";
     }
-
+    public ArrayList<String> getOccupationViaApi(String actorsInfoJson){
+        //created by myself
+        JSONArray getinformation=new JSONArray(actorsInfoJson);
+        JSONObject getOccupation=(JSONObject) getinformation.get(0);
+        JSONArray occupationArrays=getOccupation.getJSONArray("occupation");
+        for(int i=0;i<occupationArrays.length();i++)
+            this.occupationList.add(occupationArrays.getString(i));
+        return this.occupationList;
+    }
 }

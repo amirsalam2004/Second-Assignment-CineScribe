@@ -69,6 +69,7 @@ public class Movie {
         }
     }
     public String getRuntimeViaApi(String movieInfoJson){
+        //created by myself
         JSONObject getRuntime=new JSONObject(movieInfoJson);
         runtime=getRuntime.getString("Runtime");
         return runtime;
