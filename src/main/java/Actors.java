@@ -8,9 +8,9 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 public class Actors {
     public static final String API_KEY = "JFBvTTeuMdHyTL1+db88MA==aa4RM9amNQDus5Ad";   // TODO --> add your api key about Actors here
-    String netWorth="";
+    String netWorth;
     Boolean isAlive;
-
+    String dateOfDeath;
 
 //    public Actors(String netWorth, boolean isAlive){
 //        //TODO --> (Write a proper constructor using the get_from_api functions)
@@ -60,14 +60,19 @@ public class Actors {
         //TODO --> (If your chosen actor is alive it must return true otherwise it must return false)
         JSONArray getinformation=new JSONArray(actorsInfoJson);
         JSONObject getIsAlive=(JSONObject) getinformation.get(0);
-        this.isAlive=getIsAlive.getBoolean("is_alive");
+        this.isAlive = getIsAlive.getBoolean("is_alive");
         return this.isAlive;
     }
 
     public String getDateOfDeathViaApi(String actorsInfoJson){
         //TODO --> (If your chosen actor is deceased it must return the date of death)  -->
-        String date = "";
-        return date;
+        JSONArray getinformation=new JSONArray(actorsInfoJson);
+        JSONObject getDateOfDeath=(JSONObject) getinformation.get(0);
+        if(getDateOfDeath.has("death")){
+            this.dateOfDeath=getDateOfDeath.getString("death");
+            return this.dateOfDeath;
+        }
+        return "There is no information to display";
     }
 
 }
