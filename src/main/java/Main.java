@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         // TODO --> complete main function
-        JOptionPane.showMessageDialog(null,"Hello\nWelcome to our program\nWe provide you with your favorite information about movies and actors");
+        JOptionPane.showMessageDialog(null,"Hello\nWelcome to our program\n" +
+                "We provide you with your favorite information about movies and actors");
         try {
             runMenu
                     ();
@@ -20,7 +21,6 @@ public class Main {
     }
     public static void runMenu() throws IOException {
         // TODO
-        Actors actors=new Actors();
         Movie movie=new Movie();
         String movieName;
         while(true) {
@@ -52,10 +52,12 @@ public class Main {
                                 if (input.equals("1")) {
                                     break;
                                 } else {
-                                    String actorInfo = actors.getActorData(input);
+                                    Actors actors=new Actors(input);
+                                    String actorInfo = actors.actorData;
+                                    double netWorth=actors.getNetWorthViaApi(actorInfo)/1000;
                                     JOptionPane.showMessageDialog(null, "actor name : " + input
                                             + "\nOccupations : " + actors.getOccupationViaApi(actorInfo)
-                                            + "\nNet worth : " + actors.getNetWorthViaApi(actorInfo)
+                                            + "\nNet worth : " + Double.toString(netWorth).replace(".0","")+"000"
                                             + "\nIs live : " + actors.isAlive(actorInfo)
                                             + "\nDeath date : " + actors.getDateOfDeathViaApi(actorInfo));
                                 }

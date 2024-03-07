@@ -10,14 +10,25 @@ import java.util.ArrayList;
 
 public class Actors {
     public static final String API_KEY = "JFBvTTeuMdHyTL1+db88MA==aa4RM9amNQDus5Ad";   // TODO --> add your api key about Actors here
-    String netWorth;
+    double netWorth;
     Boolean isAlive;
     String dateOfDeath;
-    ArrayList<String> occupationList=new ArrayList<>();
+    String actorData;
+    ArrayList<String> occupationList;
 
-//    public Actors(String netWorth, boolean isAlive){
-//        //TODO --> (Write a proper constructor using the get_from_api functions)
-//    }
+    public Actors(String dateOfDeath, boolean isAlive){
+        //TODO --> (Write a proper constructor using the get_from_api functions)
+        this.dateOfDeath=dateOfDeath;
+        this.isAlive=isAlive;
+        occupationList=new ArrayList<>();
+    }
+    public Actors(){
+        occupationList=new ArrayList<>();
+    }
+    public Actors(String actorName){
+        this.actorData=getActorData(actorName);
+        occupationList=new ArrayList<>();
+    }
     @SuppressWarnings({"deprecation"})
     /**
      * Retrieves data for the specified actor.
@@ -50,12 +61,11 @@ public class Actors {
             return null;
         }
     }
-    public String getNetWorthViaApi(String actorsInfoJson){
+    public Double getNetWorthViaApi(String actorsInfoJson){
         //TODO --> (This function must return the "NetWorth")
         JSONArray getinformation=new JSONArray(actorsInfoJson);
         JSONObject getNetWorth=(JSONObject) getinformation.get(0);
-        double netWorth=getNetWorth.getDouble("net_worth");
-        this.netWorth=String.valueOf(netWorth);
+        this.netWorth=getNetWorth.getDouble("net_worth");
         return this.netWorth;
     }
 
@@ -82,6 +92,7 @@ public class Actors {
     }
     public ArrayList<String> getOccupationViaApi(String actorsInfoJson){
         //created by myself
+        this.occupationList.clear();
         JSONArray getinformation=new JSONArray(actorsInfoJson);
         JSONObject getOccupation=(JSONObject) getinformation.get(0);
         JSONArray occupationArrays=getOccupation.getJSONArray("occupation");

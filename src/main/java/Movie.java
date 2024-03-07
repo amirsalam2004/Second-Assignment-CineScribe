@@ -13,9 +13,17 @@ public class Movie {
     String rating;
     String runtime;
 
-//    public Movie(ArrayList<String> actorsList, String rating, int ImdbVotes){
-//        //TODO --> (Write a proper constructor using the get_from_api functions)
-//    }
+
+    public Movie(ArrayList<String> actorsList, String rating, int ImdbVotes){
+        //TODO --> (Write a proper constructor using the get_from_api functions)
+        this.actorsList=actorsList;
+        this.rating=rating;
+        this.ImdbVotes=ImdbVotes;
+        actorsList=new ArrayList<>();
+    }
+    public  Movie(){
+        actorsList=new ArrayList<>();
+    }
 
     @SuppressWarnings("deprecation")
     /**
@@ -61,6 +69,7 @@ public class Movie {
 
     public void getActorListViaApi(String movieInfoJson){
         //TODO --> (This function must return the "Actors" in actorsList)
+        this.actorsList.clear();
         JSONObject getActorList=new JSONObject(movieInfoJson);
         String actors=getActorList.getString("Actors");
         String[] list=actors.split(",");
