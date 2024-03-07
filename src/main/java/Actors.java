@@ -59,12 +59,15 @@ public class Actors {
         return this.netWorth;
     }
 
-    public boolean isAlive(String actorsInfoJson){
+    public boolean isAlive(String actorsInfoJson) {
         //TODO --> (If your chosen actor is alive it must return true otherwise it must return false)
-        JSONArray getinformation=new JSONArray(actorsInfoJson);
-        JSONObject getIsAlive=(JSONObject) getinformation.get(0);
-        this.isAlive = getIsAlive.getBoolean("is_alive");
-        return this.isAlive;
+        JSONArray getinformation = new JSONArray(actorsInfoJson);
+        JSONObject getIsAlive = (JSONObject) getinformation.get(0);
+        if (getIsAlive.has("is_alive")) {
+            this.isAlive = getIsAlive.getBoolean("is_alive");
+            return this.isAlive;
+        }
+        return true;
     }
 
     public String getDateOfDeathViaApi(String actorsInfoJson){
