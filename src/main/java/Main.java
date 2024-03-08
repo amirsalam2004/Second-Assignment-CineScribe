@@ -57,7 +57,7 @@ public class Main {
                                     double netWorth=actors.getNetWorthViaApi(actorInfo)/1000;
                                     JOptionPane.showMessageDialog(null, "actor name : " + input
                                             + "\nOccupations : " + actors.getOccupationViaApi(actorInfo)
-                                            + "\nNet worth : " + Double.toString(netWorth).replace(".0","")+"000"
+                                            + "\nNet worth : " + Double.toString(netWorth).replace(".0","")+"000  $"
                                             + "\nIs live : " + actors.isAlive(actorInfo)
                                             + "\nDeath date : " + actors.getDateOfDeathViaApi(actorInfo));
                                 }
