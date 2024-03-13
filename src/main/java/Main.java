@@ -15,9 +15,20 @@ public class Main {
         }
     }
     private static String chooseInfoOption(){
-        Object[] option={"actors","IMDB vots","Rating","Run time","Return"};
-        Object selection=JOptionPane.showInputDialog(null,"Choose an option","Information Options",JOptionPane.INFORMATION_MESSAGE,null,option,option[0]);
+        Object[] options={"actors","IMDB vots","Rating","Run time","BACK"};
+        Object selection=JOptionPane.showInputDialog(null,"Choose an option",
+                "Information Options",JOptionPane.INFORMATION_MESSAGE,null,options,options[0]);
         return(selection.toString());
+    }
+    private static String chooseActor(ArrayList<String> actorsList){
+        actorsList.add("BACK");
+        Object[] actors=actorsList.toArray();
+        actorsList.remove(actorsList.size()-1);
+        Object selection=JOptionPane.showInputDialog(null,"Actors list : "+actorsList+
+                        "\n\nIf you want more information about one of the actors, select from the list"
+                +"\nAlso, select \"BACK\" to return to the previous window",
+                "Actors List",JOptionPane.INFORMATION_MESSAGE,null,actors,actors[0]);
+        return selection.toString();
     }
     public static void runMenu() throws IOException {
         // TODO
@@ -46,13 +57,12 @@ public class Main {
                         } else if (choose.equals("actors")) {
                             movie.getActorListViaApi(movieInfo);
                             while (true) {
-                                String input = JOptionPane.showInputDialog(null, "Actors name: " + movie.actorsList
-                                        + "\n\nIf you want more information about one of the actors in the movie, enter the name"
-                                        + "\n\nAlso, enter 1 to return to the previous window", "Movie selection", JOptionPane.QUESTION_MESSAGE);
-                                if (input.equals("1")) {
+                                String input =chooseActor(movie.actorsList);
+                                System.out.println(input);
+                                if (input.equals("BACK")) {
                                     break;
                                 } else {
-                                    Actors actors=new Actors(input);
+                                    Actors actors=new Actors(input.substring(1));
                                     String actorInfo = actors.actorData;
                                     double netWorth=actors.getNetWorthViaApi(actorInfo)/1000;
                                     JOptionPane.showMessageDialog(null, "actor name : " + input
@@ -62,7 +72,7 @@ public class Main {
                                             + "\nDeath date : " + actors.getDateOfDeathViaApi(actorInfo));
                                 }
                             }
-                        } else if (choose.equals("Return")) {
+                        } else if (choose.equals("BACK")) {
                             break;
                         }
                     }

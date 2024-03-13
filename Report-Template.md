@@ -35,7 +35,7 @@ jOptionPane() class is used for graphic display.
 ## Challenges
 1. This was my first experience in working with Json strings and specially I had trouble extracting JsonArrays.
 
-2. This was my first experience using the java swing library and I had to research its methods.
+2. This was my first experience using the java swing library and I had to research its methods
 
 3. We didn't have keys "is_live" and "death" in the Jason string related to some actors and I managed this issue.
 

@@ -65,7 +65,10 @@ public class Actors {
         //TODO --> (This function must return the "NetWorth")
         JSONArray getinformation=new JSONArray(actorsInfoJson);
         JSONObject getNetWorth=(JSONObject) getinformation.get(0);
-        this.netWorth=getNetWorth.getDouble("net_worth");
+        if(getNetWorth.has("net_worth"))
+            this.netWorth=getNetWorth.getDouble("net_worth");
+        else
+            this.netWorth=1000;
         return this.netWorth;
     }
 
@@ -95,9 +98,11 @@ public class Actors {
         this.occupationList.clear();
         JSONArray getinformation=new JSONArray(actorsInfoJson);
         JSONObject getOccupation=(JSONObject) getinformation.get(0);
-        JSONArray occupationArrays=getOccupation.getJSONArray("occupation");
-        for(int i=0;i<occupationArrays.length();i++)
-            this.occupationList.add(occupationArrays.getString(i));
+        if(getOccupation.has("occupation")) {
+            JSONArray occupationArrays = getOccupation.getJSONArray("occupation");
+            for (int i = 0; i < occupationArrays.length(); i++)
+                this.occupationList.add(occupationArrays.getString(i));
+        }
         return this.occupationList;
     }
 }
